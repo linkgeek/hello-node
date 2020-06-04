@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+<div class="box">
+    <p>后台系统</p>
+    <input type="text" id="username" placeholder="用户名" /><br />
+    <input type="password" id="password" placeholder="密码" /><br />
+    <button id="login">登录</button>
+    <button id="reg">注册</button>
+</div>
+
+<script>
+    // 登录
+    $('#login').click(function(){
+        $.ajax({
+            url:"/login",
+            data:{
+                username:$('#username').val(),
+                password:$('#password').val()
+            },
+            dataType:"json",
+            success(res){
+                if(res.err){
+                    alert(res.msg)
+                }else{
+                    alert("登录成功")
+                    location.href="admin.html"
+                }
+            }
+        })
+    })
+    // 注册
+    $('#reg').click(function(){
+        $.ajax({
+            url:"/reg",
+            method:"post",
+            data:{
+                username:$('#username').val(),
+                password:$('#password').val()
+            },
+            dataType:"json",
+            success(res){
+                if(res.err){
+                    alert(res.msg)
+                }else{
+                    alert("注册成功!")
+                }
+            }
+        })
+    })
+</script>
+ <style>
+    body {
+        background: #666;
+        display: flex;
+        align-items: center
+    }
+
+    .box {
+        width: 400px;
+        padding: 20px;
+        margin: 60px auto;
+        background: #fff;
+    }
+
+    .box p {
+        font-size: 24px;
+        text-align: center
+    }
+
+    .box input {
+        height: 50px;
+        border: 1px #ddd solid;
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        font-size: 18px
+    }
+
+    .box button {
+        width: 100%;
+        font-size: 16px;
+        margin-bottom: 20px;
+        height: 50px;
+        border: none;
+        background: #f60;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .box button:last-child {
+        background: none;
+        color: #f60;
+        border: 1px #f60 solid
+    }
+</style>
+</body>
+</html>
